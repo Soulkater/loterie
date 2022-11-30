@@ -10,7 +10,7 @@ namespace DataLayer.Model
     public class Partie
     {
         [Key]
-        public int Guid { get; set; }
+        public string Guid { get; set; }
         public string GrillePartie { get; set; }
 
         #region cle etrangere de la table "Tirage"

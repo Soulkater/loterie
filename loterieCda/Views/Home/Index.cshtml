@@ -3,18 +3,20 @@
 }
 
 <div id="milieu">
-    <input type="submit" value="Jouer" class="btn-jouer">
+    <a class="btn-jouer" asp-controller="Loterie" asp-action="Loterie">Jouer</a>
     <div>
         <p>Prochain tirage</p>
         <p class="temps">04:51</p>
         <p>Minutes</p>
     </div>
-    <input type="submit" value="Règles" class="btn-regles">
+    <a class="btn-regles" asp-controller="Regles" asp-action="Regles">Règles</a>
 </div>
 
 <div id="section-code">
     <span class="titre">Entrer votre code</span>
-    <div class="champ"></div>
+    <div class="champ">
+        <input type="text" class="entrer-champ" name="entrer-champ">
+    </div>
 </div>
 
-<input type="submit" value="Valider" class="valider-guid">
+<a class="valider-guid" asp-controller="Resultat" asp-action="Resultat">Valider</a>
