@@ -30,7 +30,7 @@ body {
 header {
     background-color: #0B7A75;
     width: 100%;
-    height: 89px;
+    height: 88px;
     display: flex;
     justify-content: start;
 }
@@ -186,10 +186,12 @@ header {
 /* LOTERIE */
 #info {
     width: 243px;
-    height: 800px;
     background-color: #CFCECE;
     border-radius: 10px;
     margin: auto;
+    position: absolute;
+    left: 115px;
+    bottom: 564px;
 }
 
     #info p {
@@ -205,7 +207,7 @@ header {
 
 #resultat {
     background-color: #0B7A75;
-    width: 453px;
+    width: 390px;
     height: 70px;
     border-radius: 10px;
     margin: 10px auto;
@@ -215,8 +217,8 @@ header {
     #resultat #cagnotte {
         background-color: #CFCECE;
         color: #0B7A75;
-        font-size: 24px;
-        width: 449px;
+        font-size: 20px;
+        width: 385px;
         height: 35px;
         border-radius: 10px;
         margin: 2px auto;
@@ -224,7 +226,7 @@ header {
 
     #resultat #gain {
         color: #FFFFFF;
-        font-size: 24px;
+        font-size: 20px;
     }
 
 #grille-total {
@@ -235,7 +237,7 @@ header {
 .grille input {
     width: 40px;
     height: 40px;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
     cursor: pointer;
     border-radius: 50%;
@@ -245,7 +247,7 @@ header {
     color: #FFFFFF;
     transition: all 0.2s ease;
     display: inline-block;
-    margin: 10px 10px;
+    margin: 7px 7px;
 }
 
     .grille input:hover {
@@ -258,26 +260,32 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 10px;
 }
 
 .btn-selection {
-    width: 60px;
-    height: 60px;
-    font-size: 24px;
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
     font-weight: bold;
     border-radius: 50%;
     background-color: #C17767;
     color: #FFFFFF;
-    margin: 30px 20px;
+    margin: 7px 7px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
+.section-btn-valider-reinitisaliser {
+/*    display: flex;
+    justify-content: space-between;*/
+}
+
 input[type="submit"] {
-    width: 160px;
-    height: 55px;
-    font-size: 24px;
+    width: 120px;
+    height: 40px;
+    font-size: 20px;
     cursor: pointer;
     background-color: #CFCECE;
     color: #0B7A75;
@@ -298,9 +306,9 @@ input[type="submit"] {
     }
 
 input[type="reset"] {
-    width: 160px;
-    height: 55px;
-    font-size: 24px;
+    width: 120px;
+    height: 40px;
+    font-size: 20px;
     cursor: pointer;
     background-color: #0B7A75;
     color: #FFFFFF;
@@ -325,75 +333,94 @@ input[type="reset"] {
 /* REGLES */
 #principale {
     width: 50%;
-    height: 720px;
     background-color: #CFCECE;
     border-radius: 10px;
     margin: auto;
 }
 
+    #principale p {
+        margin: 10px;
+    }
+
 .premiere {
-    margin-top: 70px;
+    margin-top: 50px;
 }
 
     .premiere div {
         color: #FFFFFF;
         background: #0B7A75;
-        font-size: 24px;
+        font-size: 20px;
         font-weight: 600;
         width: 100%;
         border-radius: 10px;
         border-style: none;
+        height: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
 .deuxieme div {
     color: #FFFFFF;
     background: #0B7A75;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 600;
     width: 100%;
     border-radius: 10px;
     border-style: none;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .troisieme div {
     color: #FFFFFF;
     background: #0B7A75;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 600;
     width: 100%;
     border-radius: 10px;
     border-style: none;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .quatrieme div {
     color: #FFFFFF;
     background: #0B7A75;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 600;
     width: 100%;
     border-radius: 10px;
     border-style: none;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 
 /* VISUALISATION */
 #debut {
-    margin-top: 50px;
+    margin-top: 30px;
 }
 
 .titre {
     color: #0B7A75;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 600;
 }
 
 .affichage {
     background-color: #CFCECE;
-    height: 55px;
+    height: 30px;
     width: 464px;
     border-radius: 10px;
     border-style: none;
-    margin: 10px auto 50px auto;
+    margin: 10px auto 25px auto;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -401,25 +428,25 @@ input[type="reset"] {
 
     .affichage p {
         color: #0B7A75;
-        font-size: 24px;
+        font-size: 18px;
         font-weight: 500;
     }
 
 .tirage-gagnant {
     background-color: #CFCECE;
-    height: 55px;
+    height: 45px;
     width: 464px;
     border-radius: 10px;
     border-style: none;
-    margin: 10px auto 50px auto;
+    margin: 10px auto 25px auto;
     display: flex;
     justify-content: space-between;
 }
 
     .tirage-gagnant input[type="button"] {
-        width: 40px;
-        height: 40px;
-        font-size: 20px;
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
         border-radius: 50%;
         border-style: none;
         background-color: #C17767;
@@ -429,19 +456,19 @@ input[type="reset"] {
 
 .votre-tirage {
     background-color: #CFCECE;
-    height: 55px;
+    height: 45px;
     width: 464px;
     border-radius: 10px;
     border-style: none;
-    margin: 10px auto 50px auto;
+    margin: 10px auto 25px auto;
     display: flex;
     justify-content: space-between;
 }
 
     .votre-tirage input[type="button"] {
-        width: 40px;
-        height: 40px;
-        font-size: 20px;
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
         border-radius: 50%;
         border-style: none;
         background-color: #0B7A75;
@@ -451,7 +478,7 @@ input[type="reset"] {
 
 .votre-gain {
     background-color: #CFCECE;
-    height: 107px;
+    height: 60px;
     width: 464px;
     border-radius: 10px;
     border-style: none;
@@ -463,6 +490,6 @@ input[type="reset"] {
 
     .votre-gain p {
         color: #0B7A75;
-        font-size: 24px;
+        font-size: 18px;
         font-weight: 500;
     }
