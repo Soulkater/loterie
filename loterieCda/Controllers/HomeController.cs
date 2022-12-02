@@ -17,16 +17,36 @@ namespace loterieCda.Controllers
         {
             return View();
         }
-
-        public IActionResult Privacy()
+        public ActionResult Loterie()
+        {
+            return View();
+        }
+        public ActionResult Regles()
+        {
+            return View();
+        }
+        public ActionResult Resultat()
         {
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+        // Exemple d'une route personnalisee
+        //[Route("tuto/{year:int}/{month:int}")]
+        //public ActionResult Test(int day, int year, int month)
+        //{
+        //    return new ContentResult { Content = "Le tuto a été publié le " + day + "/" + month + "/" + year };
+        //}
+
+        // Initialement c'était la ...
+        //public IActionResult Privacy()
+        //{
+        //    return View();
+        //}
+
+        //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        //public IActionResult Error()
+        //{
+        //    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        //}
     }
 }
