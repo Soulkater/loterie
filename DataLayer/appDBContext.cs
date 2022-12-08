@@ -11,5 +11,6 @@ namespace DataLayer
         }
         public DbSet<Partie> Partie { get; set; } 
         public DbSet<Tirage> Tirage { get; set; } 
+
     }
 }

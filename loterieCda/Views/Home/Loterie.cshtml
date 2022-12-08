@@ -1,26 +1,50 @@
-﻿@{
+﻿@*On fait appel a notre ViewModel*@
+@*@model List<loterieCda.Models.LoterieViewModel>*@
+@model loterieCda.Models.LoterieViewModel
+
+@{
     ViewData["Title"] = "Home Page";
+    var guid = Guid.NewGuid().ToString("N").Substring(0, 22);
 }
 
 <div id="resultat">
     <div id="cagnotte">
-        Cagnotte actuelle
+        Cagnotte actuelle : @*@if (Model !=null && Model.Any())
+        {
+            @foreach (var tirage in Model)
+            {
+                @tirage.CagnotteTirage
+            }
+        }*@
     </div>
 
     <div id="gain">
-        Gain: xx choux
+        Gain : xx choux
     </div>
 </div>
 
 <div id="info" style="display: none">
     <p>Code partie actuelle :</p>
-    <p>w5kIKLSt0ECp_sRh4ol-mw</p>
+    <p>@guid</p>
     <p class="alert">! VEUILLEZ LE NOTER !</p>
 </div>
+
+<form asp-action="Create" asp-controller="Loterie" method="post">
+    <div>
+        <input type="hidden" asp-for="GrillePartie">
+        <input type="hidden" asp-for="Guid" value="@guid">
+        <span asp-validation-for="GrillePartie"></span>
+    </div>
+    <div>
+        <button type="submit">Envoyer</button>
+    </div>
+</form>
+
 
 @{
     for (int i = 1; i < 50; i++)
     {
+        
         <div id="grille-total">
             <div class="grille">
                 <input type="button" value="@i" id="@i" onclick="jouer(this.value)">
@@ -41,12 +65,14 @@
 
 <div id="selection"></div>
 
-@*<div id="message"></div>*@
+<div id="message"></div>
 
 <script>
     $i = 0;
-
+    var valConcat = "";
     function jouer(val) {
+        valConcat += val+ ",";
+
         if ($i < 6) {
             document.getElementById(val).style.visibility = "hidden";
             document.getElementById("selection").innerHTML += '<div class="btn-selection">' + val + '</div>';
@@ -55,6 +81,7 @@
             if ($i === 6) {
                 document.getElementById('info').style.display = "block";
                 document.getElementById("message").innerHTML = '<p>Votre selection est terminé, vous pouvez valider</p>';
+                document.getElementsByName("GrillePartie")[0].value = valConcat.substring(0, valConcat.length - 1);
             }
         }
     }
