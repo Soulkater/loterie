@@ -1,11 +1,14 @@
-﻿@{
+﻿@model LoterieViewModel
+
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div id="debut">
     <span class="titre">Votre code</span>
     <div class="affichage">
-        <p>w5kIKLSt0ECp_sRh4ol-mw</p>
+        <p>@Model.Guid</p>
     </div>
 </div>
 
@@ -19,12 +22,16 @@
 <div>
     <span class="titre">Tirage gagnant</span>
     <div class="tirage-gagnant">
+        
+        <div>@Model.GrillePartie</div>
+        @*
         <input type="button" value="5" id="5">
         <input type="button" value="16" id="16">
         <input type="button" value="28" id="28">
         <input type="button" value="31" id="31">
         <input type="button" value="41" id="41">
         <input type="button" value="43" id="43">
+        *@
     </div>
 </div>
 

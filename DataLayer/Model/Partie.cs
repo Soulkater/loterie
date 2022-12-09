@@ -10,13 +10,20 @@ namespace DataLayer.Model
 {
     public class Partie
     {
-        [Key,DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Key]
+        public int Id { get; set; }
         public string Guid { get; set; }
+
         public string GrillePartie { get; set; }
 
         #region cle etrangere de la table "Tirage"
-        public int TirageId { get; set; }
+        public int? TirageId { get; set; }
         public Tirage Tirage { get; set; }
+
+        public static implicit operator string?(Partie? v)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
 
     }

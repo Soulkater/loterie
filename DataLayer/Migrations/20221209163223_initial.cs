@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DataLayer.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -30,14 +30,15 @@ namespace DataLayer.Migrations
                 name: "Partie",
                 columns: table => new
                 {
-                    Guid = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Guid = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     GrillePartie = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TirageId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Partie", x => x.Guid);
+                    table.PrimaryKey("PK_Partie", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Partie_Tirage_TirageId",
                         column: x => x.TirageId,

@@ -4,6 +4,7 @@ using DataLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataLayer.Migrations
 {
     [DbContext(typeof(appDbContext))]
-    partial class appDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221209163223_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,7 +41,7 @@ namespace DataLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TirageId")
+                    b.Property<int>("TirageId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -75,7 +78,9 @@ namespace DataLayer.Migrations
                 {
                     b.HasOne("DataLayer.Model.Tirage", "Tirage")
                         .WithMany("Partie")
-                        .HasForeignKey("TirageId");
+                        .HasForeignKey("TirageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Tirage");
                 });

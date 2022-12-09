@@ -3,20 +3,45 @@
 }
 
 <div id="milieu">
-    <a class="btn-jouer" asp-controller="Home" asp-action="Loterie">Jouer</a>
+    <a class="btn-jouer" asp-controller="Loterie" asp-action="Index">Jouer</a>
     <div>
         <p>Prochain tirage</p>
         <p class="temps">04:51</p>
         <p>Minutes</p>
     </div>
-    <a class="btn-regles" asp-controller="Home" asp-action="Regles">Règles</a>
+    <a class="btn-regles" asp-controller="Regles" asp-action="Index">Règles</a>
 </div>
 
-<div id="section-code">
+@*<form asp-controller="Resultat" asp-action="Index" method="post">
+    <div>
+        <input type="text" name="guid">
+    </div>
+    <div>
+        <button type="submit">Envoyer</button>
+    </div>
+</form>*@
+
+<form asp-controller="Resultat" asp-action="Index" method="post">
+    <div id="section-code">
+        <span class="titre">Entrer votre code</span>
+        <div class="champ">
+            <input type="text" class="entrer-champ" name="guid">
+        </div>
+        <div>
+            <button type="submit" class="valider-guid">Valider</button>
+        </div>
+    </div>
+</form>
+
+
+
+
+
+@*<div id="section-code">
     <span class="titre">Entrer votre code</span>
     <div class="champ">
         <input type="text" class="entrer-champ" name="entrer-champ">
     </div>
-</div>
-
-<a class="valider-guid" asp-controller="Home" asp-action="Resultat">Valider</a>
+</div>*@
+@*
+<a class="valider-guid" asp-controller="Resultat" asp-action="Index">Valider</a>*@

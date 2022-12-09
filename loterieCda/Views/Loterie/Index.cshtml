@@ -1,10 +1,9 @@
-﻿@*On fait appel a notre ViewModel*@
-@*@model List<loterieCda.Models.LoterieViewModel>*@
+﻿@*On déclare le type du model qui sera passé à la vue*@
 @model loterieCda.Models.LoterieViewModel
 
 @{
     ViewData["Title"] = "Home Page";
-    var guid = Guid.NewGuid().ToString("N").Substring(0, 22);
+    
 }
 
 <div id="resultat">
@@ -25,20 +24,20 @@
 
 <div id="info" style="display: none">
     <p>Code partie actuelle :</p>
-    <p>@guid</p>
+    <p>@Model.Guid</p>
     <p class="alert">! VEUILLEZ LE NOTER !</p>
 </div>
 
-<form asp-action="Create" asp-controller="Loterie" method="post">
+@*<form asp-action="Create" asp-controller="Loterie" method="post">
     <div>
         <input type="hidden" asp-for="GrillePartie">
-        <input type="hidden" asp-for="Guid" value="@guid">
+        <input type="hidden" asp-for="Guid">
         <span asp-validation-for="GrillePartie"></span>
     </div>
     <div>
         <button type="submit">Envoyer</button>
     </div>
-</form>
+</form>*@
 
 
 @{
@@ -58,10 +57,23 @@
     }
 }
 
-<div class="section-btn-valider-reinitisaliser">
+
+<form asp-action="Create" asp-controller="Loterie" method="post">
+    <div>
+        <input type="hidden" asp-for="GrillePartie">
+        <input type="hidden" asp-for="Guid">
+        <span asp-validation-for="GrillePartie"></span>
+    </div>
+    <div class="section-btn-valider-reinitisaliser">
+        <input type="submit" value="Valider">
+        <input type="reset" value="Réinitialiser">
+    </div>
+</form>
+
+@*<div class="section-btn-valider-reinitisaliser">
     <input type="submit" value="Valider">
     <input type="reset" value="Réinitialiser">
-</div>
+</div>*@
 
 <div id="selection"></div>
 

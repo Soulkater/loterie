@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataLayer.Migrations
 {
     [DbContext(typeof(appDbContext))]
-    [Migration("20221128113419_Initial")]
-    partial class Initial
+    [Migration("20221209163956_ajout-nullable")]
+    partial class ajoutnullable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,20 +27,24 @@ namespace DataLayer.Migrations
 
             modelBuilder.Entity("DataLayer.Model.Partie", b =>
                 {
-                    b.Property<int>("Guid")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Guid"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("GrillePartie")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TirageId")
+                    b.Property<string>("Guid")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("TirageId")
                         .HasColumnType("int");
 
-                    b.HasKey("Guid");
+                    b.HasKey("Id");
 
                     b.HasIndex("TirageId");
 
@@ -74,9 +78,7 @@ namespace DataLayer.Migrations
                 {
                     b.HasOne("DataLayer.Model.Tirage", "Tirage")
                         .WithMany("Partie")
-                        .HasForeignKey("TirageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TirageId");
 
                     b.Navigation("Tirage");
                 });

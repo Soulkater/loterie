@@ -21,7 +21,10 @@ namespace loterieCda.Controllers
         }
         public ActionResult Index()
         {
-            return View();
+            LoterieViewModel loterie = new LoterieViewModel();
+            loterie.Guid = Guid.NewGuid().ToString("N").Substring(0, 22);
+
+            return View(loterie);
         }
 
         public ActionResult Create()
@@ -36,23 +39,15 @@ namespace loterieCda.Controllers
         {
             try
             {
-
                 var partie = new Partie();
                 partie.Guid = loterie.Guid;
                 partie.GrillePartie = loterie.GrillePartie;
 
-                // On cherche le set objet Partie, puis on ajoute l'objet au dbset
-                _ctx.Set<Partie>().Add(partie);
+                // Ajout de la partie créé dans le DbSet correspondant
+                _ctx.Partie.Add(partie);
+
+                //application de l'ajout en BDD
                 _ctx.SaveChanges();
-
-                var query = _ctx.Set<Partie>().AsQueryable();
-
-                query = query.Where(p => p.Guid == partie.Guid);
-
-                query = query.Include(p => p.Tirage);
-
-                var result = query.ToList();
-
 
                 return RedirectToAction(nameof(Index), "Home");
             }
