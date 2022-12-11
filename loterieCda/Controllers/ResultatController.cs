@@ -27,21 +27,15 @@ namespace loterieCda.Controllers
         [HttpPost]
         public IActionResult Index(string guid)
         {
-            //Récupération du dbSet Partie
+            // Retourne le premier élément d'une séquence, on récupère le GUID
             var partie = _ctx.Partie.FirstOrDefault(p => p.Guid == guid);
-            //Autre manière d'ecrire une requête
-            //var dbSet = _ctx.Partie.Where(p => p.Guid == guid).FirstOrDefault();
+            // Autre manière d'ecrire la requête
+            // var dbSet = _ctx.Partie.Where(p => p.Guid == guid).FirstOrDefault();
 
-            var resultat = new LoterieViewModel
+            var resultat = new ResultatViewModel
             {
                 Guid = partie.Guid,
             };
-
-            //TODO: convertion de l'objet en LoterieViewModel tel qu'attendu par la View
-            //var iTest = new LoterieViewModel
-            //{
-            //    Guid = result
-            //};
 
             //Renvoie de la vue avec l'objet LoterieViewModel
             return View(resultat);

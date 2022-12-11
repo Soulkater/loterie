@@ -13,7 +13,6 @@ namespace DataLayer.Model
         [Key]
         public int Id { get; set; }
         public string Guid { get; set; }
-
         public string GrillePartie { get; set; }
 
         #region cle etrangere de la table "Tirage"
@@ -25,6 +24,5 @@ namespace DataLayer.Model
             throw new NotImplementedException();
         }
         #endregion
-
     }
 }

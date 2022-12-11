@@ -1,20 +1,13 @@
-﻿@*On déclare le type du model qui sera passé à la vue*@
-@model loterieCda.Models.LoterieViewModel
+﻿@model loterieCda.Models.LoterieViewModel
 
 @{
     ViewData["Title"] = "Home Page";
-    
+
 }
 
 <div id="resultat">
     <div id="cagnotte">
-        Cagnotte actuelle : @*@if (Model !=null && Model.Any())
-        {
-            @foreach (var tirage in Model)
-            {
-                @tirage.CagnotteTirage
-            }
-        }*@
+        Cagnotte actuelle : @Model.CagnotteTirage
     </div>
 
     <div id="gain">
@@ -28,28 +21,28 @@
     <p class="alert">! VEUILLEZ LE NOTER !</p>
 </div>
 
-@*<form asp-action="Create" asp-controller="Loterie" method="post">
-    <div>
-        <input type="hidden" asp-for="GrillePartie">
-        <input type="hidden" asp-for="Guid">
-        <span asp-validation-for="GrillePartie"></span>
-    </div>
-    <div>
-        <button type="submit">Envoyer</button>
-    </div>
-</form>*@
-
-
 @{
+    // Algorithme de comparaison
+    //int[] Lottery = new int[6];
+    //int[] Guessing = new int[6];
+
+    //Random r = new Random();
+    //for (int i = 0; i < Lottery.Length; i++)
+    //{
+    //    Lottery[i] = r.Next(1, 50);
+    //}
+    //Array.Sort(Lottery);
+
+    // Génère dynamiquement la grille
     for (int i = 1; i < 50; i++)
     {
-        
         <div id="grille-total">
             <div class="grille">
                 <input type="button" value="@i" id="@i" onclick="jouer(this.value)">
             </div>
         </div>
 
+        // Saut de ligne au reste de la division euclidienne
         if (i % 7 == 0)
         {
             <br />
@@ -57,12 +50,15 @@
     }
 }
 
-
 <form asp-action="Create" asp-controller="Loterie" method="post">
     <div>
+        @* Je cache quelques input *@
         <input type="hidden" asp-for="GrillePartie">
         <input type="hidden" asp-for="Guid">
+        <input type="hidden" asp-for="ResultatTirage">
+        @* ... *@
         <span asp-validation-for="GrillePartie"></span>
+        <span asp-validation-for="ResultatTirage"></span>
     </div>
     <div class="section-btn-valider-reinitisaliser">
         <input type="submit" value="Valider">
@@ -70,29 +66,29 @@
     </div>
 </form>
 
-@*<div class="section-btn-valider-reinitisaliser">
-    <input type="submit" value="Valider">
-    <input type="reset" value="Réinitialiser">
-</div>*@
+<div id="message"></div>
 
 <div id="selection"></div>
-
-<div id="message"></div>
 
 <script>
     $i = 0;
     var valConcat = "";
     function jouer(val) {
-        valConcat += val+ ",";
+        valConcat += val + ",";
 
         if ($i < 6) {
+            // Cache l'input
             document.getElementById(val).style.visibility = "hidden";
+            // Affiche l'input dans la DIV
             document.getElementById("selection").innerHTML += '<div class="btn-selection">' + val + '</div>';
             $i++;
 
             if ($i === 6) {
+                // J'affiche la DIV avec les informations
                 document.getElementById('info').style.display = "block";
-                document.getElementById("message").innerHTML = '<p>Votre selection est terminé, vous pouvez valider</p>';
+                // J'affiche un message d'information à l'utilisateur
+                document.getElementById("message").innerHTML = '<p>VOTRE SELECTION EST TERMINE, VOUS POUVEZ VALIDER</p>';
+                // Permet de choper la string de la saisie de l'utilisateur de la grille
                 document.getElementsByName("GrillePartie")[0].value = valConcat.substring(0, valConcat.length - 1);
             }
         }

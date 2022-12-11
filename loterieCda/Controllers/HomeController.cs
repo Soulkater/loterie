@@ -25,31 +25,6 @@ namespace loterieCda.Controllers
             return View();
         }
 
-        //Partie LOTERIE
-        //Affiche les data en BDD
-        //public IActionResult Index()
-        //{
-
-        //    var tirages = _ctx.Tirage.ToList();
-        //    List<LoterieViewModel> tirageList = new List<LoterieViewModel>();
-
-        //    if (tirages != null)
-        //    {
-        //        foreach (var tirage in tirages)
-        //        {
-        //            var TirageViewModel = new LoterieViewModel()
-        //            {
-        //                ResultatTirage = tirage.ResultatTirage,
-        //                DateHeureTirage = tirage.DateHeureTirage,
-        //                CagnotteTirage = tirage.CagnotteTirage
-        //            };
-        //            tirageList.Add(TirageViewModel);
-        //        }
-        //        return View(tirageList);
-        //    }
-        //    return View();
-        //}
-
         [HttpPost]
         public IActionResult Loterie(LoterieViewModel LoterieDonnee)
         {

@@ -1,5 +1,4 @@
-﻿@model LoterieViewModel
-
+﻿@model ResultatViewModel
 
 @{
     ViewData["Title"] = "Home Page";
@@ -15,7 +14,7 @@
 <div>
     <span class="titre">Date et heure du tirage</span>
     <div class="affichage">
-        <p>31/10/22 - 12:25</p>
+        <p>@Model.DateHeureTirage</p>
     </div>
 </div>
 
@@ -24,6 +23,7 @@
     <div class="tirage-gagnant">
         
         <div>@Model.GrillePartie</div>
+        @Model.ResultatTirage
         @*
         <input type="button" value="5" id="5">
         <input type="button" value="16" id="16">
@@ -38,18 +38,21 @@
 <div>
     <span class="titre">Votre tirage</span>
     <div class="votre-tirage">
+        @Model.GrillePartie
+        @*
         <input type="button" value="9" id="9" class="test">
         <input type="button" value="16" id="16">
         <input type="button" value="28" id="28">
         <input type="button" value="31" id="31">
         <input type="button" value="39" id="39">
         <input type="button" value="43" id="43">
+        *@
     </div>
 </div>
 
 <div>
     <span class="titre">Votre gain</span>
     <div class="votre-gain">
-        <p>Rang x : xx choux</p>
+        <p>Gain : @Model.CagnotteTirage</p>
     </div>
 </div>
