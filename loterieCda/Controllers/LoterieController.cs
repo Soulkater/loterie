@@ -20,29 +20,36 @@ namespace loterieCda.Controllers
             this._ctx = ctx;
         }
 
-
         public ActionResult Index()
         {
-            // On crée notre GUID
+            // On crée une variable qui appelle notre LoterieViewModel
             LoterieViewModel loterie = new LoterieViewModel();
+            // On génère notre GUID
             loterie.Guid = Guid.NewGuid().ToString("N").Substring(0, 22);
+            // On crée la date 
+            loterie.DateHeureTirage = DateTime.Now;
+
+            //
+            List<int> TbLoterie = new List<int>();
+            int nombres;
+            //
+            Random rdm = new Random();
+
+            for (int i = 0; i < 6; i++)
+            {
+                do
+                {
+                    nombres = rdm.Next(1, 50);
+                }
+                while (TbLoterie.Contains(nombres));
+                TbLoterie.Add(nombres);
+            }
+            string TbInString = String.Join(" ", TbLoterie);
+
+            loterie.ResultatTirage = TbInString;
 
             return View(loterie);
         }
-
-        public ActionResult TrySomething()
-        {
-            // Je fais des tests pour les valeurs concernant le ResultatTirage
-            ResultatViewModel resultat = new ResultatViewModel();
-            resultat.ResultatTirage = "15,51,51,15,15,15";
-
-            return View(resultat);
-        }
-
-        //public ActionResult Create()
-        //{
-        //    return View();
-        //}
 
         //POST: LoterieController/Create
         [HttpPost]
@@ -51,21 +58,24 @@ namespace loterieCda.Controllers
         {
             try
             {
+                // Les éléments de notre Table et la correspondance avec la ViewModel
+                var tirage = new Tirage();
+                tirage.ResultatTirage = loterie.ResultatTirage;
+                tirage.DateHeureTirage = loterie.DateHeureTirage;
+                
+                // Ajout de la partie créé dans le DbSet correspondant
+                _ctx.Tirage.Add(tirage);
+
+                _ctx.SaveChanges(); 
+                
                 // Notre table Partie
                 var partie = new Partie();
-                // Les éléments de notre Table et la correspondance avec la ViewModel
                 partie.Guid = loterie.Guid;
                 partie.GrillePartie = loterie.GrillePartie;
-
-                // Test qui non concluant
-                //var tirage = new Tirage();
-                //tirage.ResultatTirage = loterie.ResultatTirage;
+                partie.TirageId = tirage.Id;
 
                 // Ajout de la partie créé dans le DbSet correspondant
                 _ctx.Partie.Add(partie);
-
-                // Ajout de la partie créé dans le DbSet correspondant
-                //_ctx.Tirage.Add(tirage);
 
                 //application de l'ajout en BDD
                 _ctx.SaveChanges();

@@ -19,22 +19,21 @@ namespace loterieCda.Controllers
             this._ctx = ctx;
         }
 
-        //public ActionResult Index()
-        //{
-        //    return View();
-        //}
-
         [HttpPost]
         public IActionResult Index(string guid)
         {
             // Retourne le premier élément d'une séquence, on récupère le GUID
             var partie = _ctx.Partie.FirstOrDefault(p => p.Guid == guid);
-            // Autre manière d'ecrire la requête
-            // var dbSet = _ctx.Partie.Where(p => p.Guid == guid).FirstOrDefault();
+
+            // 
+            var tirage = _ctx.Tirage.Where(ligne => ligne.Id.Equals(partie.TirageId))
+                                    .FirstOrDefault();
 
             var resultat = new ResultatViewModel
             {
                 Guid = partie.Guid,
+                GrillePartie = partie.GrillePartie,
+                ResultatTirage = tirage.ResultatTirage
             };
 
             //Renvoie de la vue avec l'objet LoterieViewModel

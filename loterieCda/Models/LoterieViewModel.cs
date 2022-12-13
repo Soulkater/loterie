@@ -10,5 +10,7 @@ namespace loterieCda.Models
         public string ResultatTirage { get; set; }
         public DateTime DateHeureTirage { get; set; }
         public int CagnotteTirage { get; set; }
+
+
     }
 }
