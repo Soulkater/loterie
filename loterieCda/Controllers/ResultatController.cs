@@ -1,7 +1,7 @@
 ﻿using DataLayer;
-using DataLayer.Model;
+//using DataLayer.Model;
 using loterieCda.Models;
-using Microsoft.AspNetCore.Http;
+//using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace loterieCda.Controllers
@@ -16,7 +16,7 @@ namespace loterieCda.Controllers
         public ResultatController(ILogger<ResultatController> logger, appDbContext ctx)
         {
             _logger = logger;
-            this._ctx = ctx;
+            _ctx = ctx;
         }
 
         [HttpPost]

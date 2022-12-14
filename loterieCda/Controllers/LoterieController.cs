@@ -1,9 +1,9 @@
 ﻿using DataLayer;
 using DataLayer.Model;
 using loterieCda.Models;
-using Microsoft.AspNetCore.Http;
+//using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+//using Microsoft.EntityFrameworkCore;
 
 namespace loterieCda.Controllers
 {
@@ -17,7 +17,7 @@ namespace loterieCda.Controllers
         public LoterieController(ILogger<LoterieController> logger, appDbContext ctx)
         {
             _logger = logger;
-            this._ctx = ctx;
+            _ctx = ctx;
         }
 
         public ActionResult Index()
@@ -29,10 +29,10 @@ namespace loterieCda.Controllers
             // On crée la date 
             loterie.DateHeureTirage = DateTime.Now;
 
-            //
+            // On utilise une liste pour la génération de nos chiffres
             List<int> TbLoterie = new List<int>();
             int nombres;
-            //
+            // Utilisation de la méthode Random pour générer aléatoirement des chiffres
             Random rdm = new Random();
 
             for (int i = 0; i < 6; i++)
@@ -87,29 +87,5 @@ namespace loterieCda.Controllers
                 return View();
             }
         }
-
-        // J'ai voulu intégrer des valeurs dans la table Tirage ... sans succès ...
-        //POST: LoterieController/Create
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create(ResultatViewModel resultat)
-        //{
-        //    try
-        //    {
-        //        var tirage = new Tirage();
-        //        tirage.DateHeureTirage = resultat.DateHeureTirage;
-        //        tirage.ResultatTirage = resultat.ResultatTirage;
-
-        //        _ctx.Tirage.Add(tirage);
-
-        //        _ctx.SaveChanges();
-
-        //        return RedirectToAction(nameof(Index), "Home");
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
     }
 }

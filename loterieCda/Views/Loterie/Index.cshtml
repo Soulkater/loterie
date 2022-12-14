@@ -2,59 +2,65 @@
 
 @{
     ViewData["Title"] = "Home Page";
-
 }
 
-<p>@Model.DateHeureTirage</p>
 <div id="resultat">
+
     <div id="cagnotte">
         Cagnotte actuelle : @Model.CagnotteTirage
     </div>
 
     <div id="gain">
-        Gain : xx choux
+        Gain : @Model.CagnotteTirage choux
     </div>
+
 </div>
 
-<div id="info" style="display: none">
-    <p>Code partie actuelle :</p>
-    <p>@Model.Guid</p>
-    <p class="alert">! VEUILLEZ LE NOTER !</p>
-</div>
+<div id="affiche-test" style="display:none">
 
-@{
-    // Génère dynamiquement la grille
-    for (int i = 1; i < 50; i++)
-    {
-        <div id="grille-total">
-            <div class="grille">
-                <input type="button" value="@i" id="@i" onclick="jouer(this.value)">
-            </div>
+    <div id="info">
+        <p>Code partie actuelle :</p>
+        <p>@Model.Guid</p>
+        <p class="alert">! VEUILLEZ LE NOTER !</p>
+    </div>
+
+    <form asp-action="Create" asp-controller="Loterie" method="post">
+        <div>
+            @* Je cache quelques input *@
+            <input type="hidden" asp-for="GrillePartie">
+            <input type="hidden" asp-for="Guid">
+            <input type="hidden" asp-for="ResultatTirage">
+            @* ... *@
+            <span asp-validation-for="GrillePartie"></span>
+            <span asp-validation-for="ResultatTirage"></span>
         </div>
+        <div id="section-btn-valider-reinitisaliser">
+            <input type="submit" value="Valider">
+            <input type="reset" value="Réinitialiser" onclick="test(this.value)">
+        </div>
+    </form>
 
-        // Saut de ligne au reste de la division euclidienne
-        if (i % 7 == 0)
+</div>
+
+<div id="vanish">
+    @{
+        // Génère dynamiquement la grille
+        for (int i = 1; i < 50; i++)
         {
-            <br />
+            <div id="grille-total">
+                <div class="grille">
+                    <input type="button" value="@i" id="@i" onclick="jouer(this.value)">
+                </div>
+            </div>
+
+            // Saut de ligne au reste de la division euclidienne
+            if (i % 7 == 0)
+            {
+                <br />
+            }
         }
     }
-}
-
-<form asp-action="Create" asp-controller="Loterie" method="post">
-    <div>
-        @* Je cache quelques input *@
-        <input type="hidden" asp-for="GrillePartie">
-        <input type="hidden" asp-for="Guid">
-        <input type="hidden" asp-for="ResultatTirage">
-        @* ... *@
-        <span asp-validation-for="GrillePartie"></span>
-        <span asp-validation-for="ResultatTirage"></span>
-    </div>
-    <div id="section-btn-valider-reinitisaliser" style="display:none">
-        <input type="submit" value="Valider">
-        <input type="reset" value="Réinitialiser">
-    </div>
-</form>
+</div>
 
 <div id="selection"></div>
 
@@ -72,13 +78,18 @@
             $i++;
 
             if ($i === 6) {
+                // Cache la grille
+                document.getElementById("vanish").style.display = "none";
                 // J'affiche la DIV avec les boutons valider et reset
-                document.getElementById("section-btn-valider-reinitisaliser").style.display = "block";
-                // J'affiche la DIV avec les informations
-                document.getElementById('info').style.display = "block";
+                document.getElementById("affiche-test").style.display = "block";
                 // Permet de choper la string de la saisie de l'utilisateur de la grille
                 document.getElementsByName("GrillePartie")[0].value = valConcat.substring(0, valConcat.length - 1);
             }
         }
+    }
+
+    function test(val) {
+        // Affiche la grille si je clique le l'input reset
+        document.getElementById("vanish").style.display = "block";
     }
 </script>

@@ -10,6 +10,8 @@ builder.Services.AddDbContext<appDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
     //options.EnableSensitiveDataLogging(true);
 });
+// 
+//builder.Services.AddScoped<ILoterieService, LoterieService>();
 
 var app = builder.Build();
 
